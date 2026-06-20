@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing Estratégico · Foro Innova Cuernavaca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0A10; --bg-2:#15131D; --bg-3:#1B1826;
+    --ink:#F2F0F7; --ink-soft:#B9B4C7; --line:#2A2735;
+    --accent:#A878FF; --accent-bright:#BC97FF; --accent-deep:#7C4DFF;
+    --violet-2:#7E6BE8; --muted:#857F97; --max:760px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(120% 80% at 100% 0%,rgba(124,77,255,.16),transparent 55%),radial-gradient(100% 70% at 0% 100%,rgba(168,120,255,.10),transparent 50%)}
+  .serif{font-family:'Fraunces',serif}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px;position:relative;z-index:1}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,10,16,.78);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid var(--line)}
+  .nav-in{max-width:var(--max);margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap;color:var(--ink)}
+  .brand span{color:var(--accent)}
+  #backBtn{display:none;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);font-family:inherit;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:30px;cursor:pointer;letter-spacing:.02em;transition:.2s}
+  #backBtn:hover{background:var(--accent);color:#0B0A10;border-color:var(--accent)}
+  #backBtn::before{content:"←  "}
+
+  .briefing{border-bottom:1px solid var(--line);padding:32px 0 26px}
+  .conf{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-bright);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .conf::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+  .briefing h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(30px,8.5vw,48px);line-height:1.04;letter-spacing:-.02em;margin-bottom:16px;color:var(--accent)}
+  .briefing h1 em{font-style:italic;color:var(--accent-bright)}
+  .for{font-size:14.5px;color:var(--ink-soft)}
+  .for b{color:var(--ink);font-weight:600}
+
+  .kpiband{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-radius:16px;overflow:hidden;margin:22px 0 8px;border:1px solid var(--line)}
+  .kpiband .k{background:var(--bg-2);padding:16px 16px}
+  .kpiband .k b{font-family:'Fraunces',serif;font-size:26px;font-weight:500;display:block;line-height:1;color:var(--accent)}
+  .kpiband .k small{font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+
+  .filter{display:flex;align-items:center;gap:11px;margin:22px 0 4px;font-size:13.5px;color:var(--ink-soft)}
+  .switch{position:relative;width:44px;height:25px;flex:none;cursor:pointer}
+  .switch input{opacity:0;width:0;height:0}
+  .slider{position:absolute;inset:0;background:var(--line);border-radius:30px;transition:.25s}
+  .slider::before{content:"";position:absolute;height:19px;width:19px;left:3px;top:3px;background:#E8E4F2;border-radius:50%;transition:.25s}
+  .switch input:checked + .slider{background:var(--accent)}
+  .switch input:checked + .slider::before{transform:translateX(19px);background:#fff}
+  .filter b{color:var(--accent-bright)}
+
+  #overview{padding:8px 0 60px}
+  .sec-h{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:26px 0 16px}
+  .modgrid{display:grid;grid-template-columns:1fr;gap:13px}
+  .mod{text-align:left;width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:16px;padding:20px;cursor:pointer;font-family:inherit;color:inherit;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s,border-color .25s;display:flex;gap:16px;align-items:flex-start}
+  .mod:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(124,77,255,.55);border-color:var(--accent-deep)}
+  .mod .mn{font-family:'Fraunces',serif;font-size:15px;color:var(--accent);font-weight:600;min-width:30px;padding-top:3px}
+  .mod .mc{flex:1}
+  .mod .mk{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:5px}
+  .mod .mt{font-family:'Fraunces',serif;font-size:21px;font-weight:500;line-height:1.12;letter-spacing:-.01em;margin-bottom:7px;color:var(--accent)}
+  .mod .mb{font-size:13.5px;color:var(--ink-soft);line-height:1.45}
+  .mod .arrow{align-self:center;color:var(--muted);font-size:18px;transition:.2s}
+  .mod:hover .arrow{color:var(--accent-bright);transform:translateX(3px)}
+
+  #detail{display:none;padding:14px 0 64px}
+  .d-kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-bright);font-weight:600;margin-bottom:14px}
+  .d-title{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,7.5vw,40px);line-height:1.06;letter-spacing:-.015em;margin-bottom:14px;color:var(--accent)}
+  .d-blurb{font-size:16px;color:var(--ink-soft);max-width:560px;margin-bottom:30px}
+
+  .d-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px;margin-bottom:30px}
+  .d-kpis .c{background:var(--bg-2);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .d-kpis .c b{font-family:'Fraunces',serif;font-size:clamp(26px,7vw,34px);font-weight:500;line-height:1;display:block;color:var(--ink)}
+  .d-kpis .c.acc b{color:var(--accent)} .d-kpis .c.teal b{color:var(--violet-2)}
+  .d-kpis .c small{font-size:12.5px;color:var(--ink-soft);margin-top:8px;display:block;line-height:1.35}
+
+  .bars{display:flex;flex-direction:column;gap:16px;margin-bottom:30px}
+  .bar-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .bar-label{font-weight:600;font-size:14.5px;color:var(--ink)}
+  .bar-val{font-family:'Fraunces',serif;font-size:18px;font-weight:500;color:var(--accent-bright)}
+  .track{height:8px;background:var(--bg-3);border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+  .fill{height:100%;border-radius:20px;width:0;background:linear-gradient(90deg,var(--accent-bright),var(--accent-deep));transition:width 1s cubic-bezier(.16,1,.3,1);box-shadow:0 0 14px rgba(124,77,255,.5)}
+  .alt .fill{background:linear-gradient(90deg,#9486F0,#5B49C9);box-shadow:0 0 14px rgba(91,73,201,.5)}
+  .alt .bar-val{color:var(--violet-2)}
+
+  .insight{background:linear-gradient(180deg,rgba(124,77,255,.16),rgba(124,77,255,.05));border:1px solid rgba(168,120,255,.35);border-radius:16px;padding:20px;margin-bottom:34px}
+  .insight .il{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-bright);font-weight:600;margin-bottom:8px}
+  .insight p{font-size:15.5px;line-height:1.5;color:var(--ink)}
+
+  .agenda-h{font-family:'Fraunces',serif;font-size:21px;font-weight:500;margin-bottom:6px;letter-spacing:-.01em;color:var(--accent)}
+  .agenda-sub{font-size:13.5px;color:var(--muted);margin-bottom:18px}
+  .props{display:flex;flex-direction:column;gap:11px}
+  .prop{border:1px solid var(--line);border-radius:14px;background:var(--bg-2);overflow:hidden;transition:border-color .2s}
+  .prop.open{border-color:var(--accent-deep)}
+  .prop.hide{display:none}
+  .prop-head{padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:13px}
+  .prop-head:hover{background:var(--bg-3)}
+  .tag{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:4px 9px;border-radius:30px;white-space:nowrap;flex:none}
+  .tag.mun{background:rgba(168,120,255,.22);color:#C9AEFF}
+  .tag.est{background:rgba(126,107,232,.22);color:#B6AEF5}
+  .tag.fed{background:rgba(133,127,151,.22);color:#B5B0C2}
+  .prop-t{flex:1;font-weight:600;font-size:14.5px;color:var(--ink)}
+  .prop-x{color:var(--accent-bright);font-size:16px;transition:transform .25s}
+  .prop.open .prop-x{transform:rotate(45deg)}
+  .prop-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .prop-body .pinner{padding:0 18px 16px;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+
+  .paths{display:grid;grid-template-columns:1fr;gap:13px;margin-top:8px}
+  .path{border-radius:16px;padding:22px;border:1px solid var(--line)}
+  .path.a{background:var(--bg-2)} .path.b{background:linear-gradient(180deg,rgba(124,77,255,.18),rgba(124,77,255,.05));border-color:rgba(168,120,255,.4)}
+  .path h4{font-family:'Fraunces',serif;font-size:19px;font-weight:500;margin-bottom:8px;color:var(--ink)}
+  .path.b h4{color:var(--accent-bright)}
+  .path p{font-size:14px;color:var(--ink-soft)}
+
+  footer{padding:30px 0 56px;text-align:center;font-size:11px;letter-spacing:.06em;color:var(--muted);border-top:1px solid var(--line)}
+  footer span{color:var(--accent)}
+
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+  .rv.in{opacity:1;transform:none}
+  @media(min-width:620px){.modgrid{grid-template-columns:1fr 1fr}.kpiband{grid-template-columns:repeat(4,1fr)}.paths{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="brand">Foro <span>Innova</span> · Briefing</div>
+    <button id="backBtn">Volver al panorama</button>
+  </div>
+</nav>
+
+<div class="briefing wrap">
+  <div class="conf">Briefing estratégico · Diagnóstico empresarial</div>
+  <h1>El estado de la <em>MiPyME</em> en Cuernavaca.</h1>
+  <p class="for">Fuente: 1er Foro Innova Cuernavaca, 230 empresas &nbsp;·&nbsp; INEGI · Banxico · OCDE</p>
+  <div class="kpiband">
+    <div class="k"><b>230</b><small>Empresas diagnosticadas</small></div>
+    <div class="k"><b>53%</b><small>Señala inseguridad</small></div>
+    <div class="k"><b>87.5%</b><small>Pide liderazgo formal</small></div>
+    <div class="k"><b>≤5 días</b><small>Meta de apertura</small></div>
+  </div>
+  <div class="filter">
+    <label class="switch"><input type="checkbox" id="munFilter"><span class="slider"></span></label>
+    <span>Ver solo acciones de <b>competencia municipal</b> dentro de cada capítulo</span>
+  </div>
+</div>
+
+<main id="overview" class="wrap">
+  <div class="sec-h">Capítulos del informe · toca para profundizar</div>
+  <div class="modgrid" id="modgrid"></div>
+</main>
+
+<section id="detail" class="wrap"></section>
+
+<footer>Insumo técnico · <span>drmiguelavila.com</span> · Asesoría en datos e inteligencia estratégica</footer>
+
+<script>
+const DATA = [
+  {
+    id:"diag", num:"01", kicker:"El diagnóstico · 230 empresas",
+    title:"Lo que frena el crecimiento.",
+    blurb:"Sobre respuestas abiertas: una empresa podía mencionar más de un obstáculo. Esta es la jerarquía real del dolor empresarial en la ciudad.",
+    kpis:[{v:"201",l:"Respuestas válidas",c:""},{v:"53%",l:"Inseguridad, el #1",c:"acc"}],
+    bars:[
+      {label:"Inseguridad",val:"53%",pct:100},
+      {label:"Financiamiento",val:"49%",pct:92},
+      {label:"Carga regulatoria y trámites",val:"24%",pct:45},
+      {label:"Innovación y digitalización",val:"15%",pct:28},
+      {label:"Talento y capital humano",val:"8%",pct:15}
+    ],
+    insight:"La inseguridad y el financiamiento concentran el dolor; pero la carga regulatoria —24%— es el freno que más depende directamente del ámbito municipal.",
+    proposals:[
+      {t:"Red de seguridad y consumo local por zonas",d:"Mapa de comercios confiables, botón de alerta comunitaria y campañas de consumo local coordinadas con cámaras. Bajo costo, alto símbolo de cercanía.",lvl:"mun"},
+      {t:"Mesa de Ordenamiento Comercial",d:"Municipio + Secretaría de Economía + CANACO para atacar informalidad y competencia desleal con criterios claros.",lvl:"mun"},
+      {t:"Ventanilla Única de Financiamiento MiPyME",d:"Un solo portal que concentre los créditos estatales, municipales y federales hoy dispersos y subutilizados.",lvl:"est"}
+    ]
+  },
+  {
+    id:"sect", num:"02", kicker:"El diagnóstico · potencial",
+    title:"Hacia dónde mira la ciudad.",
+    blurb:"Sectores con mayor potencial frente al Plan Estatal 2025–2030, según 184 respuestas. La vocación económica de Cuernavaca, en datos.",
+    kpis:[{v:"37%",l:"Tecnología y conocimiento",c:"teal"},{v:"26%",l:"Turismo y servicios",c:"teal"}],
+    bars:[
+      {label:"Tecnología / economía del conocimiento",val:"37%",pct:100,alt:1},
+      {label:"Industria ligera / manufactura",val:"27%",pct:73,alt:1},
+      {label:"Turismo y servicios turísticos",val:"26%",pct:70,alt:1},
+      {label:"Agroindustria",val:"12%",pct:32,alt:1},
+      {label:"Salud y bienestar",val:"8%",pct:22,alt:1}
+    ],
+    insight:"El empresariado y los planes oficiales coinciden en tecnología, turismo y manufactura. El reto no es alinear visión, sino velocidad de ejecución.",
+    proposals:[
+      {t:"Cuernavaca como polo de innovación",d:"Vincular el discurso de ciudad creativa y tecnológica con infraestructura real: suelo, conectividad y trámites ágiles para sectores de conocimiento.",lvl:"mun"},
+      {t:"Clústers sectoriales locales",d:"Articular turismo, tecnología y manufactura ligera con universidades de la ciudad.",lvl:"est"}
+    ]
+  },
+  {
+    id:"fin", num:"03", kicker:"El diagnóstico · financiamiento",
+    title:"No quieren convocatorias sueltas.",
+    blurb:"Financiamiento e incentivos más efectivos para formalizar y escalar, según 196 respuestas. Piden un paquete, no piezas aisladas.",
+    kpis:[{v:"54%",l:"Crédito preferencial",c:"acc"},{v:"49%",l:"Asesoría y capacitación",c:""}],
+    bars:[
+      {label:"Créditos preferenciales",val:"54%",pct:100},
+      {label:"Asesoría y capacitación",val:"49%",pct:90},
+      {label:"Apoyo en tecnología / digitalización",val:"37%",pct:68},
+      {label:"Incentivos fiscales",val:"32%",pct:59}
+    ],
+    insight:"La fórmula que pide la calle es una sola: crédito + acompañamiento + tecnología. Los incentivos fiscales municipales (predial, licencias) son la palanca local.",
+    proposals:[
+      {t:"Incentivos fiscales municipales por formalización",d:"Descuentos o gracia en derechos y licencias para empresas que se formalizan o digitalizan. Es la herramienta fiscal que sí controla el municipio.",lvl:"mun"},
+      {t:"Programa de Aceleración MiPyME",d:"Diagnóstico + asesoría + crédito en un mismo esquema, modelo NAFIN.",lvl:"est"},
+      {t:"Difusión real de Fondo Morelos y FIFODEPI",d:"Programas que existen pero la mayoría no conoce ni usa a tiempo.",lvl:"fed"}
+    ]
+  },
+  {
+    id:"tram", num:"04", kicker:"El diagnóstico · trámites",
+    title:"Gobierno digital, percepción analógica.",
+    blurb:"Acciones concretas que el municipio debe emprender para simplificar trámites, según 187 respuestas. Aquí el ámbito municipal tiene poder directo.",
+    kpis:[{v:"35%",l:"Pide digitalizar trámites",c:"acc"},{v:"60%",l:"No confía en trámites actuales",c:""}],
+    bars:[
+      {label:"Digitalización de trámites (cero papel)",val:"35%",pct:100},
+      {label:"Reducción de costos / derechos / licencias",val:"22%",pct:63},
+      {label:"Simplificación administrativa",val:"11%",pct:31},
+      {label:"Ventanilla única empresarial",val:"10%",pct:29}
+    ],
+    insight:"El empresariado ya internalizó el discurso de gobierno digital, pero no lo vive. Cerrar esa brecha es una meta medible y 100% municipal.",
+    proposals:[
+      {t:"Ventanilla Única Digital Cuernavaca 2026",d:"Un portal, un expediente del empresario, firma electrónica, apertura ≤5 días hábiles. La meta clave de un gobierno eficiente.",lvl:"mun"},
+      {t:"Licencia Cero 48 horas para giros de bajo riesgo",d:"Resolución exprés para los negocios que no requieren inspección compleja.",lvl:"mun"},
+      {t:"Digitalización de Protección Civil, alcoholes y anuncios",d:"Los tres trámites que más fricción generan, totalmente en línea.",lvl:"mun"},
+      {t:"Metas públicas de tiempos de trámite",d:"% de trámites 100% digitales al 2027 e índice de satisfacción empresarial publicados.",lvl:"mun"}
+    ]
+  },
+  {
+    id:"human", num:"05", kicker:"Panel 2 · Gestión Humana",
+    title:"El liderazgo ya no es opcional.",
+    blurb:"Capital humano dejó de ser asunto interno: define productividad, rotación y empleabilidad joven. La academia local ya ofrece el método.",
+    kpis:[{v:"87.5%",l:"Pide liderazgo formal",c:"acc"},{v:"65%",l:"No mide clima laboral",c:"teal"}],
+    bars:[
+      {label:"Considera muy relevante un programa de liderazgo",val:"87.5%",pct:100},
+      {label:"No realiza encuestas de clima laboral",val:"65%",pct:74,alt:1},
+      {label:"Ve el relevo generacional como oportunidad",val:"57%",pct:65,alt:1}
+    ],
+    insight:"El modelo BIT (Bienestar–Liderazgo–Ambiente–Trabajo con propósito) permite medir clima sin burocracia. UAEM, UTEZ y TecMilenio ya lo proponen.",
+    proposals:[
+      {t:"Escuela de Liderazgo Positivo MiPyME",d:"Diplomado modular co-diseñado con UAEM, UTEZ, TecMilenio y CANACO. El municipio convoca y certifica.",lvl:"mun"},
+      {t:"Kit de Clima Laboral (modelo BIT)",d:"Cuestionario corto y gratuito, con apoyo técnico universitario para las empresas de la ciudad.",lvl:"est"},
+      {t:"Semestre empresarial con universidades locales",d:"Jóvenes resuelven retos reales de empresas: 90% de empleabilidad reportada.",lvl:"est"}
+    ]
+  },
+  {
+    id:"legis", num:"06", kicker:"Panel 3 · Legislación",
+    title:"Reglas para crecer, no para estorbar.",
+    blurb:"Para la MiPyME la legislación define costos, tiempos y riesgo de sanción. El verdadero cuello de botella es la mejora regulatoria —terreno local.",
+    kpis:[{v:"68%",l:"Pide claridad operativa",c:"acc"},{v:"150+",l:"Leyes que afectan operar",c:""}],
+    bars:[
+      {label:"Frustración por trámites lentos y costosos",val:"Alta",pct:90},
+      {label:"Confusión sobre Ley Silla / NOM-036",val:"Alta",pct:80},
+      {label:"Criterios discrecionales en inspecciones",val:"Media-alta",pct:70}
+    ],
+    insight:"El empresario no puede leer 150+ leyes. Pide acompañamiento práctico e inspecciones previsibles. La estandarización local es la respuesta.",
+    proposals:[
+      {t:"Protocolo de Inspecciones con Firma Digital",d:"Checklist único, trazable en tiempo real, notificaciones electrónicas. Combate corrupción y discrecionalidad.",lvl:"mun"},
+      {t:"Comité Mixto de Regulación Empresarial",d:"CANACO + Municipio revisan y eliminan normas redundantes de forma permanente.",lvl:"mun"},
+      {t:"Manual 'Cómo Hacer Negocios en Cuernavaca'",d:"Versión moderna del Doing Business: procesos, costos, tiempos y contactos reales.",lvl:"mun"},
+      {t:"Guía Técnica 'Cumplimiento Inteligente'",d:"Cómo cumplir Ley Silla, NOM-035 y jornada 40h sin elevar costos, por giro.",lvl:"est"}
+    ]
+  },
+  {
+    id:"innov", num:"07", kicker:"Panel 4 · Innovación",
+    title:"Innovar dejó de ser un lujo.",
+    blurb:"Tres dolores centrales: falta de financiamiento para tecnología, déficit de capacitación en IA y miedo a ciberataques. La demanda es masiva y urgente.",
+    kpis:[{v:"52%",l:"Pide apoyo en digitalización",c:"acc"},{v:"80%",l:"Pide vínculo universidad-empresa",c:"teal"}],
+    bars:[
+      {label:"Falta de financiamiento para tecnología",val:"Crítico",pct:95},
+      {label:"Baja capacitación en IA y comercio digital",val:"Alto",pct:82},
+      {label:"Miedo a ciberataques y fraudes",val:"Alto",pct:75},
+      {label:"Desconexión universidad–empresa",val:"Medio-alto",pct:68,alt:1}
+    ],
+    insight:"\"La IA no sustituye tu conocimiento; lo amplifica.\" El acompañamiento práctico —no la convocatoria genérica— es lo que detona adopción.",
+    proposals:[
+      {t:"Hackatones y laboratorios vivos por sector",d:"Comercio, turismo, servicios: pilotos reales que el municipio puede albergar y promover.",lvl:"mun"},
+      {t:"Programa Estatal de Adopción Tecnológica",d:"Roadmap por giro con consultores certificados vía cámaras.",lvl:"est"},
+      {t:"Distrito de Innovación y Logística",d:"Parque tecnológico + recinto fiscal conectado al nearshoring. Visión de largo plazo.",lvl:"est"}
+    ]
+  },
+  {
+    id:"macro", num:"08", kicker:"Entorno · INEGI · Banxico · OCDE",
+    title:"La tijera estructural.",
+    blurb:"El contexto que explica la presión sobre cada negocio: más costos y obligaciones, sobre una economía que crece poco y produce poco.",
+    kpis:[{v:"+215%",l:"Salario mínimo 2018–2025",c:"acc"},{v:"~0.8%",l:"PIB real promedio anual",c:""},{v:"−60%",l:"Productividad vs OCDE",c:"teal"}],
+    bars:[],
+    insight:"No se pide menos derechos ni menos reglas. Se pide que las nuevas obligaciones lleguen con una agenda real de productividad, tecnología y talento.",
+    proposals:[
+      {t:"Leer cada decisión pública por su costo a la MiPyME",d:"Antes de cada derecho, licencia o requisito nuevo: ¿qué presión agrega a una economía que ya carga el ajuste? Criterio de gobierno pro-empresa.",lvl:"mun"}
+    ]
+  },
+  {
+    id:"global", num:"09", kicker:"Visión global · Gabriela Soní, UBS",
+    title:"México en el radar positivo.",
+    blurb:"La posición arancelaria efectiva favorece a México frente a Asia. La inversión es el cuello de botella; la llave es la certeza en el T-MEC.",
+    kpis:[{v:"5–6%",l:"Arancel efectivo MX (China ~40%)",c:"acc"},{v:"+14%",l:"Export. manufactura no auto 2025",c:""}],
+    bars:[
+      {label:"Crecimiento 2025",val:"0.3%",pct:14},
+      {label:"Crecimiento 2026 (proyectado)",val:"1.1–1.4%",pct:58},
+      {label:"Crecimiento 2027 (potencial)",val:"~2%",pct:100}
+    ],
+    insight:"La ventana 2026–2027 es real. Pero el capital solo se ancla donde hay seguridad, certeza jurídica, logística eficiente y talento. Eso se construye localmente.",
+    proposals:[
+      {t:"Hacer de Cuernavaca un territorio 'T-MEC ready'",d:"Trámites rápidos, inspecciones previsibles y seguridad: los estándares que exige la inversión que busca relocalizarse.",lvl:"mun"}
+    ]
+  },
+  {
+    id:"decision", num:"10", kicker:"Conclusión",
+    title:"La decisión histórica.",
+    blurb:"El reto no es saber qué hacer —ya se sabe—. El reto es decidir el camino. Hay dos.",
+    kpis:[],
+    bars:[],
+    insight:"Cuernavaca no tiene un problema empresarial: tiene una oportunidad económica histórica. Aprovecharla o dejarla pasar marcará la próxima década.",
+    proposals:[],
+    paths:true
+  }
+];
+
+const LVL = {mun:"Municipal", est:"Estatal", fed:"Federal"};
+const grid = document.getElementById('modgrid');
+const overview = document.getElementById('overview');
+const detail = document.getElementById('detail');
+const backBtn = document.getElementById('backBtn');
+const munFilter = document.getElementById('munFilter');
+
+DATA.forEach((m,i)=>{
+  const b=document.createElement('button');
+  b.className='mod rv'; b.style.transitionDelay=(Math.min(i,6)*55)+'ms';
+  b.innerHTML=`<span class="mn">${m.num}</span><span class="mc"><span class="mk">${m.kicker}</span><span class="mt">${m.title}</span><span class="mb">${m.blurb}</span></span><span class="arrow">→</span>`;
+  b.onclick=()=>openDetail(m.id);
+  grid.appendChild(b);
+});
+
+function reveal(scope){
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){
+      e.target.classList.add('in');
+      e.target.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%');
+      io.unobserve(e.target);
+    }});
+  },{threshold:.15});
+  scope.querySelectorAll('.rv').forEach(el=>io.observe(el));
+}
+reveal(overview);
+
+function openDetail(id){
+  const m=DATA.find(x=>x.id===id);
+  let html=`<div class="d-kicker rv">${m.kicker}</div><h2 class="d-title rv">${m.title}</h2><p class="d-blurb rv">${m.blurb}</p>`;
+  if(m.kpis && m.kpis.length){
+    html+=`<div class="d-kpis rv">`+m.kpis.map(k=>`<div class="c ${k.c}"><b>${k.v}</b><small>${k.l}</small></div>`).join('')+`</div>`;
+  }
+  if(m.bars && m.bars.length){
+    html+=`<div class="bars rv">`+m.bars.map(bb=>`<div class="${bb.alt?'alt':''}"><div class="bar-head"><span class="bar-label">${bb.label}</span><span class="bar-val">${bb.val}</span></div><div class="track"><div class="fill" data-w="${bb.pct}"></div></div></div>`).join('')+`</div>`;
+  }
+  if(m.insight){
+    html+=`<div class="insight rv"><div class="il">Lectura estratégica</div><p>${m.insight}</p></div>`;
+  }
+  if(m.paths){
+    html+=`<div class="paths rv"><div class="path a"><h4>Seguir igual</h4><p>Operar como hasta ahora, esperando resultados distintos. La ventana se va a otras ciudades.</p></div><div class="path b"><h4>Cuernavaca T-MEC ready</h4><p>Reglas claras, trámites digitales, financiamiento real, talento e innovación. Liderar la región.</p></div></div>`;
+  }
+  if(m.proposals && m.proposals.length){
+    html+=`<div class="rv"><div class="agenda-h">Acciones recomendadas</div><div class="agenda-sub">Toca cada acción para ver el detalle · etiqueta = nivel de gobierno con la atribución</div><div class="props">`+
+      m.proposals.map(p=>`<div class="prop" data-lvl="${p.lvl}"><div class="prop-head"><span class="tag ${p.lvl}">${LVL[p.lvl]}</span><span class="prop-t">${p.t}</span><span class="prop-x">+</span></div><div class="prop-body"><div class="pinner">${p.d}</div></div></div>`).join('')+
+      `</div></div>`;
+  }
+  detail.innerHTML=html;
+  detail.querySelectorAll('.prop-head').forEach(h=>{
+    h.onclick=()=>{
+      const p=h.parentElement, body=p.querySelector('.prop-body');
+      const open=p.classList.toggle('open');
+      body.style.maxHeight=open?body.scrollHeight+'px':0;
+    };
+  });
+  applyFilter();
+  overview.style.display='none';
+  detail.style.display='block';
+  backBtn.style.display='inline-block';
+  window.scrollTo({top:0,behavior:'instant'});
+  reveal(detail);
+}
+
+backBtn.onclick=()=>{
+  detail.style.display='none';
+  overview.style.display='block';
+  backBtn.style.display='none';
+  window.scrollTo({top:0,behavior:'instant'});
+};
+
+function applyFilter(){
+  const only=munFilter.checked;
+  detail.querySelectorAll('.prop').forEach(p=>{
+    p.classList.toggle('hide', only && p.dataset.lvl!=='mun');
+  });
+}
+munFilter.onchange=applyFilter;
+</script>
+</body>
+</html>
